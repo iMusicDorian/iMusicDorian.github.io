@@ -16,20 +16,22 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="SongMASS: Automatic Song Writing with Pre-training and Alignment Constraint">
-<meta property="og:url" content="http://example.com/2023/11/10/SongMASS-Automatic-Song-Writing-with-Pre-training-and-Alignment-Constraint/index.html">
+    <meta name="description" content="根据https:&#x2F;&#x2F;www.cnblogs.com&#x2F;pikeduo&#x2F;p&#x2F;16938738.html中的代码，其中有基于api得到歌曲id的代码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to crawl lyrics and music data from netease music with artist&#39;s name and song&#39;s name">
+<meta property="og:url" content="http://example.com/2023/11/16/How-to-crawl-lyrics-and-music-data-from-netease-music-with-artist-s-name-and-song-s-name/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="根据https:&#x2F;&#x2F;www.cnblogs.com&#x2F;pikeduo&#x2F;p&#x2F;16938738.html中的代码，其中有基于api得到歌曲id的代码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-10T02:21:38.000Z">
-<meta property="article:modified_time" content="2023-11-10T02:24:22.147Z">
+<meta property="article:published_time" content="2023-11-16T15:39:53.000Z">
+<meta property="article:modified_time" content="2023-11-16T16:51:30.362Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="paper">
+<meta property="article:tag" content="crawler">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>SongMASS: Automatic Song Writing with Pre-training and Alignment Constraint - Hexo</title>
+  <title>How to crawl lyrics and music data from netease music with artist&#39;s name and song&#39;s name - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -195,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SongMASS: Automatic Song Writing with Pre-training and Alignment Constraint"></span>
+            <span id="subtitle" data-typed-text="How to crawl lyrics and music data from netease music with artist&#39;s name and song&#39;s name"></span>
           
         </div>
 
@@ -206,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-10 10:21" pubdate>
-          November 10, 2023 am
+        <time datetime="2023-11-16 23:39" pubdate>
+          November 16, 2023 pm
         </time>
       </span>
     
@@ -218,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          2.7k words
         
       </span>
     
@@ -229,7 +231,7 @@
         
         
         
-          1 mins
+          23 mins
         
       </span>
     
@@ -266,12 +268,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">SongMASS: Automatic Song Writing with Pre-training and Alignment Constraint</h1>
+            <h1 id="seo-header">How to crawl lyrics and music data from netease music with artist&#39;s name and song&#39;s name</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <p>根据<a target="_blank" rel="noopener" href="https://www.cnblogs.com/pikeduo/p/16938738.html%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%9C%89%E5%9F%BA%E4%BA%8Eapi%E5%BE%97%E5%88%B0%E6%AD%8C%E6%9B%B2id%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%9A">https://www.cnblogs.com/pikeduo/p/16938738.html中的代码，其中有基于api得到歌曲id的代码：</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">api接口</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">from</span> urllib3.exceptions <span class="hljs-keyword">import</span> InsecureRequestWarning<br><br>requests.packages.urllib3.disable_warnings(InsecureRequestWarning)<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">wangyiyun</span>:<br>    <span class="hljs-comment"># 获取数据</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_data</span>(<span class="hljs-params">self, url, data</span>):<br>        re = requests.post(url=url, data=data, verify=<span class="hljs-literal">False</span>)<br>        <span class="hljs-keyword">return</span> re.json()<br>    <span class="hljs-comment"># 返回搜索数据</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_search_data</span>(<span class="hljs-params">self, s=<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-number">1</span>, offset=<span class="hljs-number">0</span>, total=<span class="hljs-string">&#x27;true&#x27;</span>, limit=<span class="hljs-number">30</span>, csrf_token=<span class="hljs-string">&#x27;&#x27;</span></span>):<br>        url = <span class="hljs-string">&#x27;https://music.163.com/api/cloudsearch/get/web&#x27;</span><br>        data = &#123;<br>            <span class="hljs-string">&#x27;hlpretag&#x27;</span>: <span class="hljs-string">&#x27;&lt;span class=&quot;s-fc7&quot;&gt;&#x27;</span>,<br>            <span class="hljs-string">&#x27;hlposttag&#x27;</span>: <span class="hljs-string">&#x27;&lt;/span&gt;&#x27;</span>,<br>            <span class="hljs-string">&#x27;s&#x27;</span>: s,<br>            <span class="hljs-string">&#x27;type&#x27;</span>: <span class="hljs-built_in">type</span>,<br>            <span class="hljs-string">&#x27;offset&#x27;</span>: offset,<br>            <span class="hljs-string">&#x27;total&#x27;</span>: total,<br>            <span class="hljs-string">&#x27;limit&#x27;</span>: limit,<br>            <span class="hljs-string">&#x27;csrf_token&#x27;</span>: csrf_token<br>        &#125;<br>        <span class="hljs-keyword">return</span> self.get_data(url, data)<br><br>    <span class="hljs-comment"># 返回歌词数据</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_lyric_data</span>(<span class="hljs-params">self, <span class="hljs-built_in">id</span>, lv=-<span class="hljs-number">1</span>, tv=-<span class="hljs-number">1</span>, csrf_token=<span class="hljs-string">&#x27;&#x27;</span></span>):<br>        url = <span class="hljs-string">&#x27;https://music.163.com/api/song/lyric&#x27;</span><br>        data = &#123;<br>            <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-built_in">id</span>,<br>            <span class="hljs-string">&#x27;lv&#x27;</span>: lv,<br>            <span class="hljs-string">&#x27;tv&#x27;</span>: tv,<br>            <span class="hljs-string">&#x27;csrf_token&#x27;</span>: csrf_token<br>        &#125;<br>        <span class="hljs-keyword">return</span> self.get_data(url, data)<br><br>    <span class="hljs-comment"># 返回音乐详情,包含了音质等级和可下载权限</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_detail_data</span>(<span class="hljs-params">self, <span class="hljs-built_in">id</span>, csrf_token=<span class="hljs-string">&#x27;&#x27;</span></span>):<br>        url = <span class="hljs-string">&#x27;https://music.163.com/api/v3/song/detail&#x27;</span><br>        c = <span class="hljs-string">&#x27;[&#123;&#x27;</span> + <span class="hljs-string">f&#x27;&quot;id&quot;:&quot;<span class="hljs-subst">&#123;<span class="hljs-built_in">id</span>&#125;</span>&quot;&#x27;</span> + <span class="hljs-string">&#x27;&#125;]&#x27;</span><br>        data = &#123;<br>            <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-built_in">id</span>,<br>            <span class="hljs-string">&#x27;c&#x27;</span>: c,<br>            <span class="hljs-string">&#x27;csrf_token&#x27;</span>: csrf_token<br>        &#125;<br>        <span class="hljs-keyword">return</span>  self.get_data(url, data)<br><br>    <span class="hljs-comment"># 返回下载数据，level代表音质等级，encodeType代表编码类型，flac可存储无损音质，目前无法下载无损音乐</span><br>    <span class="hljs-comment"># # 音质 standard标准 higher较高 exhigh极高 lossless无损 hires</span><br>    <span class="hljs-comment"># # 编码类型 aac flac</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_download_data</span>(<span class="hljs-params">self, <span class="hljs-built_in">id</span>, level=<span class="hljs-string">&#x27;exhigh&#x27;</span>, encodeType=<span class="hljs-string">&#x27;flac&#x27;</span>, csrf_token=<span class="hljs-string">&#x27;&#x27;</span></span>):<br>        url = <span class="hljs-string">&#x27;https://music.163.com//api/song/enhance/player/url/v1&#x27;</span><br>        data = &#123;<br>            <span class="hljs-string">&#x27;encodeType&#x27;</span>: encodeType,<br>            <span class="hljs-string">&#x27;ids&#x27;</span>: <span class="hljs-built_in">str</span>(<span class="hljs-built_in">id</span>),<br>            <span class="hljs-string">&#x27;level&#x27;</span>: level,<br>            <span class="hljs-string">&#x27;csrf_token&#x27;</span>: csrf_token<br>        &#125;<br>        <span class="hljs-keyword">return</span> self.get_data(url, data)<br><br>    <span class="hljs-comment"># 通过播放器外链的方式返回的音乐详情数据</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_detail_outdata</span>(<span class="hljs-params">self, <span class="hljs-built_in">id</span>, limit=<span class="hljs-number">10000</span>, offset=<span class="hljs-number">0</span>, csrf_token=<span class="hljs-string">&#x27;&#x27;</span></span>):<br>        url = <span class="hljs-string">&#x27;https://music.163.com/api/song/detail&#x27;</span><br>        data = &#123;<br>            <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-built_in">id</span>,<br>            <span class="hljs-string">&#x27;ids&#x27;</span>: <span class="hljs-string">f&#x27;[<span class="hljs-subst">&#123;<span class="hljs-built_in">str</span>(<span class="hljs-built_in">id</span>)&#125;</span>]&#x27;</span>,<br>            <span class="hljs-string">&#x27;limit&#x27;</span>: limit,<br>            <span class="hljs-string">&#x27;offset&#x27;</span>: offset,<br>            <span class="hljs-string">&#x27;csrf_token&#x27;</span>: csrf_token<br>        &#125;<br>        <span class="hljs-keyword">return</span> self.get_data(url, data)<br><br>    <span class="hljs-comment"># 通过播放器外链的方式返回的音乐下载数据</span><br>    <span class="hljs-comment"># br代表音质，四个等级 标准128000 较高192000 极高320000 无损999000</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_download_outdata</span>(<span class="hljs-params">self, <span class="hljs-built_in">id</span>, br=<span class="hljs-number">320000</span>, csrf_token=<span class="hljs-string">&#x27;&#x27;</span></span>):<br>        url = <span class="hljs-string">&#x27;https://music.163.com/api/song/enhance/player/url&#x27;</span><br>        data = &#123;<br>            <span class="hljs-string">&#x27;br&#x27;</span>: br,<br>            <span class="hljs-string">&#x27;ids&#x27;</span>: <span class="hljs-built_in">str</span>(<span class="hljs-built_in">id</span>),<br>            <span class="hljs-string">&#x27;csrf_token&#x27;</span>: csrf_token<br>        &#125;<br>        <span class="hljs-keyword">return</span> self.get_data(url, data)<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
                 
               </div>
             
@@ -283,7 +292,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/paper/" class="print-no-link">#paper</a>
+        <a href="/tags/crawler/" class="print-no-link">#crawler</a>
       
     </div>
   
@@ -295,8 +304,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SongMASS: Automatic Song Writing with Pre-training and Alignment Constraint</div>
-      <div>http://example.com/2023/11/10/SongMASS-Automatic-Song-Writing-with-Pre-training-and-Alignment-Constraint/</div>
+      <div>How to crawl lyrics and music data from netease music with artist&#39;s name and song&#39;s name</div>
+      <div>http://example.com/2023/11/16/How-to-crawl-lyrics-and-music-data-from-netease-music-with-artist-s-name-and-song-s-name/</div>
     </div>
     <div class="license-meta">
       
@@ -308,7 +317,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 10, 2023</div>
+          <div>November 16, 2023</div>
         </div>
       
       
@@ -340,9 +349,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/16/How-to-crawl-lyrics-and-music-data-from-netease-music-with-artist-s-name-and-song-s-name/" title="How to crawl lyrics and music data from netease music with artist&#39;s name and song&#39;s name">
+                      <a href="/2023/11/17/Poco-X4-GT-insert-magisk-into-ROM/" title="Poco X4 GT insert magisk into ROM">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">How to crawl lyrics and music data from netease music with artist&#39;s name and song&#39;s name</span>
+                        <span class="hidden-mobile">Poco X4 GT insert magisk into ROM</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -350,8 +359,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/09/Diffusion-LM-Improves-Controllable-Text-Generation/" title="Diffusion-LM Improves Controllable Text Generation">
-                        <span class="hidden-mobile">Diffusion-LM Improves Controllable Text Generation</span>
+                      <a href="/2023/11/10/SongMASS-Automatic-Song-Writing-with-Pre-training-and-Alignment-Constraint/" title="SongMASS: Automatic Song Writing with Pre-training and Alignment Constraint">
+                        <span class="hidden-mobile">SongMASS: Automatic Song Writing with Pre-training and Alignment Constraint</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

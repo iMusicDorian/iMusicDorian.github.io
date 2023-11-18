@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://example.com/How-to-crawl-lyrics-and-music-data-from-netease-music-with-artist-s-name-and-song-s-name/image-20231118163019325.png">
 <meta property="og:image" content="http://example.com/How-to-crawl-lyrics-and-music-data-from-netease-music-with-artist-s-name-and-song-s-name/image-20231118162848696.png">
 <meta property="article:published_time" content="2023-11-16T15:39:53.000Z">
-<meta property="article:modified_time" content="2023-11-18T08:37:22.553Z">
+<meta property="article:modified_time" content="2023-11-18T11:38:04.348Z">
 <meta property="article:author" content="iMusic">
 <meta property="article:tag" content="crawler">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +236,7 @@
         
         
         
-          174 mins
+          177 mins
         
       </span>
     
@@ -379,6 +379,15 @@
 <p>第二个思路是使用一个bat脚本嵌套python脚本，即尝试在一次执行完python脚本后再次启动执行，bat脚本如下，尝试上该脚本执行100次（有效）：</p>
 <figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bat">@<span class="hljs-built_in">echo</span> off<br><span class="hljs-keyword">for</span> /L <span class="hljs-variable">%%i</span> <span class="hljs-keyword">in</span> (<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">100</span>) <span class="hljs-keyword">do</span> (<br>    python lyrics_crawler.py<br>)<br></code></pre></td></tr></table></figure>
 
+
+
+<h4 id="减少json的读写次数"><a href="#减少json的读写次数" class="headerlink" title="减少json的读写次数"></a>减少json的读写次数</h4><p>将每次获取id就完整写一次json文件改为每十次获取id再完整写一次json文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python">temp = <span class="hljs-number">0</span><br><br>......<br><br><span class="hljs-keyword">if</span> temp_num % <span class="hljs-number">10</span> == <span class="hljs-number">0</span>:<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(output_path, <span class="hljs-string">&quot;w&quot;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> file1:<br>        json.dump(updated_data, file1, indent=<span class="hljs-number">4</span>, ensure_ascii=<span class="hljs-literal">False</span>)<br>        time.sleep(<span class="hljs-number">1</span>)<br>......<br><br>temp += <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
 <h4 id="早停"><a href="#早停" class="headerlink" title="早停"></a>早停</h4><p>实际上报错不止有I&#x2F;O的error，比如还有以下几类不同的error：</p>
 <p>1：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash">something went wrong: Message:<br>Stacktrace:<br>        GetHandleVerifier [0x00007FF6EE2D82B2+55298]<br>        (No symbol) [0x00007FF6EE245E02]<br>        (No symbol) [0x00007FF6EE1005AB]<br>        (No symbol) [0x00007FF6EE14175C]<br>        (No symbol) [0x00007FF6EE1418DC]<br>        (No symbol) [0x00007FF6EE17CBC7]<br>        (No symbol) [0x00007FF6EE1620EF]<br>        (No symbol) [0x00007FF6EE17AAA4]<br>        (No symbol) [0x00007FF6EE161E83]<br>        (No symbol) [0x00007FF6EE13670A]<br>        (No symbol) [0x00007FF6EE137964]<br>        GetHandleVerifier [0x00007FF6EE650AAB+3694587]<br>        GetHandleVerifier [0x00007FF6EE6A728E+4048862]<br>        GetHandleVerifier [0x00007FF6EE69F173+4015811]<br>        GetHandleVerifier [0x00007FF6EE3747D6+695590]<br>        (No symbol) [0x00007FF6EE250CE8]<br>        (No symbol) [0x00007FF6EE24CF34]<br>        (No symbol) [0x00007FF6EE24D062]<br>        (No symbol) [0x00007FF6EE23D3A3]<br>        BaseThreadInitThunk [0x00007FFCA6CF7344+20]<br>        RtlUserThreadStart [0x00007FFCA73626B1+33]<br></code></pre></td></tr></table></figure>
@@ -389,6 +398,12 @@
 <p>3：</p>
 <p>以及一个与timelatency相关的报错，找不到报错原信息了</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">timelatency</span><br></code></pre></td></tr></table></figure>
+
+<p>4：</p>
+<p>远程服务器拒绝访问</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-comment">remote host reject(具体忘记了，没有截取下来)</span><br></code></pre></td></tr></table></figure>
+
+
 
 <p>这几类错误一般都是爬取过程中没有找到对应数据的报错，对程序运行以及爬取结果没有正确性或者效率上的影响。因此可以不用在意，着重处理I&#x2F;O error，毕竟他会拖慢我们的效率。</p>
 <p>处理代码如下：</p>

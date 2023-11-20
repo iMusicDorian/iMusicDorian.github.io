@@ -8,7 +8,7 @@
     <link href="/2023/11/20/MIDI-and-Lyrics-Data-Preprocess/"/>
     <url>/2023/11/20/MIDI-and-Lyrics-Data-Preprocess/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h2 id="将netease-music中含有时间轴的歌词全部转移到统一的文件夹下"><a href="#将netease-music中含有时间轴的歌词全部转移到统一的文件夹下" class="headerlink" title="将netease music中含有时间轴的歌词全部转移到统一的文件夹下"></a>将netease music中含有时间轴的歌词全部转移到统一的文件夹下</h2><p>由于并不是所有的歌词信息都含有时间轴，因此我们需要将含有时间轴的歌词先抽取出来。</p><p>基于如下观察，我们可以发现，含有时间轴信息的歌词文件的开头如下：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-string">&quot;[00:00.00] 作词 : Jeff Keith/Frank Hannon\n[00:00.00] 作曲 : Jeff Keith/Frank Hannon\n[00:00.00] If you can  imagine this,\n[00:19.83]The whole world sharing one big kiss\n[00:26.52]These are thoughts all through my brain,that\n[00:30.24]</span><br></code></pre></td></tr></table></figure><p>而不含有时间轴的歌词文件为如下格式：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-string">&quot;作词 : Hank Williams\n作曲 : Hank Williams\nGoodbye J</span><br></code></pre></td></tr></table></figure><p>当然，还有一些歌词文件为空：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">&#x27;&#x27;<br></code></pre></td></tr></table></figure>]]></content>
     
     
     

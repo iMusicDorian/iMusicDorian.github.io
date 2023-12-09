@@ -232,7 +232,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/12/10/CLS-is-NOT-supposed-to-be-the-first-input-token-for-decoder-only-model-while-training/" target="_self">
         <div>
-          
+          这两天在预训练模型，采用的是完整的transformer架构，但是呢，encoder的输入是音符序列（实际上是一个4维的向量序列），而decoder的输入则是传统的文本序列。由于两种数据存在明显的gap（music-&gt;text）,因此在backbone能够工作的情况下，为了进一步提升模型的效果，决定首先将encoder与decoder拆开，分别在音符序列以及歌词序列上做预训练，之后再合在一起
         </div>
       </a>
 

@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>[CLS] is NOT supposed to be the first input token for decoder-only model while training</title>
+    <link href="/2023/12/10/CLS-is-NOT-supposed-to-be-the-first-input-token-for-decoder-only-model-while-training/"/>
+    <url>/2023/12/10/CLS-is-NOT-supposed-to-be-the-first-input-token-for-decoder-only-model-while-training/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>experiment</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>MIDI and Lyrics Data Preprocess</title>
     <link href="/2023/11/20/MIDI-and-Lyrics-Data-Preprocess/"/>
     <url>/2023/11/20/MIDI-and-Lyrics-Data-Preprocess/</url>

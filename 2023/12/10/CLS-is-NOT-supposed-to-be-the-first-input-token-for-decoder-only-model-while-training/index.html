@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/.com//image-20231210035551083.png">
 <meta property="article:published_time" content="2023-12-09T17:49:02.000Z">
-<meta property="article:modified_time" content="2023-12-09T20:01:11.467Z">
+<meta property="article:modified_time" content="2023-12-09T20:01:44.441Z">
 <meta property="article:author" content="iMusic">
 <meta property="article:tag" content="experiment">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.8k words
+          5.9k words
         
       </span>
     
@@ -305,7 +305,7 @@
 
 <p>从这些例子中可以看出，模型已经很快的学习到了一些有意义的文本，一反之前生成的总是以 <code>i</code> 开头的无意义文本的常态，那我们再来看一下训练的tensorboard图像</p>
 <p><img src="/.com//image-20231210035551083.png" srcset="/img/loading.gif" lazyload alt="image-20231210035551083"></p>
-<p>只需要看紫色和黄色的线，因为这两条线是加载同一个初始的模型权重在同一个数据集上均训练两个epoch后的结果（紫色的batch是512，黄色的batch是64，原因看ps），可以发现，紫色的loss比黄色更低，而且收敛速度（曲率）明显更快，这也间接验证了之前我们的观察，提出的问题确实存在，且给出的解决方案是合理的。perfect！</p>
+<p>只需要看紫色和黄色的线，因为这两条线是加载同一个初始的模型权重在同一个数据集上均训练两个epoch后的结果（紫色的batch是512，黄色的batch是64，原因看ps），可以发现，紫色的loss比黄色更低（4.5 vs 4.583），而且收敛速度（曲率）明显更快，这也间接验证了之前我们的观察，提出的问题确实存在，且给出的解决方案是合理的。perfect！</p>
 <p>ps: 由于歌词每一句都很短，我之前使用104的文本长度上限是完全浪费了，现在将长度上限设置为了24，训练速度显著提升（120min -&gt; 25min），一晚上就能将整个数据集train好啦，哈哈~</p>
 <p>ps2：后续考虑要不要将预测token序列在遇到第一个 <code>[SEP]</code> 之后的token全部强制修改为 <code>[SEP]</code>，使模型强制意识到 <code>[SEP]</code> 是句子的末尾，从而间接的要求模型更好的去生成完整的句子。</p>
 

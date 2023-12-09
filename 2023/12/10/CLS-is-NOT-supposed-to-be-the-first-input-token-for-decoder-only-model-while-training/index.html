@@ -24,7 +24,7 @@
 <meta property="og:description" content="这两天在预训练模型，采用的是完整的transformer架构，但是呢，encoder的输入是音符序列（实际上是一个4维的向量序列），而decoder的输入则是传统的文本序列。由于两种数据存在明显的gap（music-&gt;text）,因此在backbone能够工作的情况下，为了进一步提升模型的效果，决定首先将encoder与decoder拆开，分别在音符序列以及歌词序列上做预训练，之后再合在一起">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-09T17:49:02.000Z">
-<meta property="article:modified_time" content="2023-12-09T18:13:14.873Z">
+<meta property="article:modified_time" content="2023-12-09T18:55:59.891Z">
 <meta property="article:author" content="iMusic">
 <meta property="article:tag" content="experiment">
 <meta name="twitter:card" content="summary_large_image">
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.6k words
+          4.9k words
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          30 mins
+          41 mins
         
       </span>
     
@@ -285,8 +285,18 @@
 <p>可以发现的是，所有的decoder的输入都是以 <code>[CLS] + 完整的句子</code> 作为输入，并且以 <code>完整的句子 + [EOS]</code> 作为输出（ground truth），从transformer的训练角度上讲很合理，因为decoder所需要做的事情就是通过 <code>当前的词 + encoder输出</code> 来预测 <code>下一个词</code> ，所以会对decoder的输入输出做一个token的偏移。</p>
 <p>而我们的预训练过程，也是采用的 <code>[CLS] + 完整的句子</code> 作为输入，而开头的这个 <code>[CLS]</code> 就是上述出现的问题（<code>i</code>字符总是出现在开头）的罪魁祸首。为什么这么说呢，基于实验经验与理论分析两点原因：</p>
 <ul>
-<li>实验经验方面，</li>
+<li><p>实验经验方面，在之前一版代码中，由于很多部分是直接调用的库函数以及gpt生成，质量不高，正确性不易分析，所以没有继续使用，但是在用该版代码的时候，发现模型很快能够收敛到有意义的文本输出（训练30-60分钟后）如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">66%|██████▋   | 7298/10990 [13:28&lt;06:17,  9.78it/s]<br>Generated Text: cause being free is a state of mind steady he written control charm he he ’ your bottle wedding des bottle des des bottle<br> 25%|██▌       | 2799/10990 [04:31&lt;10:29, 13.02it/s]<br> Generated Text: i give her all my love yo tell turn girl girl girl girl turn yo girl met <br>62%|██████▏   | 6799/10990 [12:30&lt;07:09,  9.75it/s]<br>Generated Text: that<span class="hljs-string">&#x27;s why i&#x27;</span>ve <span class="hljs-keyword">done</span> it again. no - no - roof. double rides rides rides writtenves double rides rides bottle rides des rides rides rides he written rides rides bottle pity forth<br></code></pre></td></tr></table></figure>
+
+<p>基本上就是训练十几二十分钟的水平，生成序列的前几个字符已经是有语义的一句话了，这就使我考虑到现行代码中可能存在的问题（虽然也有可能我的头版代码中压根没有做decoder输入输出的偏移，才会导致头版代码快速收敛，但是总之是给了我一点提醒）。</p>
+</li>
+<li><p>理论分析方面，为什么在完整的transformer中，直接以 <code>[CLS] + 完整的句子</code> 作为输入，并且以 <code>完整的句子 + [EOS]</code> 作为输出（ground truth）是可行的呢，这是因为decoder是通过 <code>当前的词 + encoder输出</code> 来预测 <code>下一个词</code>，注意 <code>encoder输出</code> 这一部分，即是说，即使每一个decoder的输入的第一个字符都是 <code>[CLS]</code> 但由于其 <code>encoder输出</code> 的输出是多变的，因此，decoder <code>生成的第一个字符</code> 也是多变的。 但是，在单独针对decoder的预训练中，<strong>没有encoder的输出作为输入的信息，那么其输入就只有 <code>当前的词</code>，而不是 <code>当前的词 + encoder输出</code></strong> ，那么此时使用 <code>[CLS]</code> 作为所有输入的开头第一个token，这件事情本身就不合理，同时，由于每次开头的输入token都是 <code>[CLS]</code>，即输入的第一个词总是一样的，所以，模型才会倾向于将 <code>i</code> 作为预测的第一个词，因为它在整个数据集中以较高的概率出现在文本的开头。同时这样的训练会使得模型无法很好的学习到其他的词之间的关系，以为第一个预测的词总是 <code>i</code> 对于后续其他的词的生成也会产生负面的影响，使模型无法正确的学习到词与词之间的条件概率分布。从而使得模型训练举步维艰。</p>
+</li>
 </ul>
+<p>改进的方式也很简单：</p>
+<p>将输入从 <code>[CLS] + 完整的句子</code> 转变为 <code>完整的句子</code></p>
+<p>将输出从 <code>完整的句子 + [EOS]</code> 转变为 <code>去掉第一个词的句子 + [EOS]</code> </p>
+<p>至于效果如何，先开始训练再说，哈哈哈。</p>
 
                 
               </div>
